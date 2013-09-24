@@ -4,12 +4,12 @@
 
 PhysicsSystem* PhysicsSystem::m_instance = 0;
 
-bool PhysicsSystem::initialize()
+bool PhysicsSystem::initialize(const float &par_gravityX, const float &par_gravityY)
 {
     if(m_instance == 0)
     {
         qDebug()<<"Initialize:"<<"PhysicsSystem";
-        m_instance = new PhysicsSystem();
+        m_instance = new PhysicsSystem(par_gravityX, par_gravityY);
         return true;
     }
     else
@@ -21,7 +21,7 @@ bool PhysicsSystem::initialize()
 
 void PhysicsSystem::shutdown()
 {
-    if(m_instance == 0)
+    if(m_instance != 0)
     {
         qDebug()<<"Shutdown:"<<"PhysicsSystem";
         delete m_instance;
@@ -38,13 +38,13 @@ PhysicsSystem* PhysicsSystem::instance()
     return m_instance;
 }
 
-PhysicsSystem::PhysicsSystem()
+PhysicsSystem::PhysicsSystem(const float &par_gravityX, const float &par_gravityY)
 {
     /*b2AABB worldAABB;
     worldAABB.lowerBound.Set(-200, -100);
     worldAABB.upperBound.Set(200, 500);*/
 
-    b2Vec2 gravity(0.0f, -10.0f);
+    b2Vec2 gravity(par_gravityX, par_gravityY);
     bool doSleep = true;
     m_world = new b2World(gravity);
     m_world->SetAllowSleeping(doSleep);
@@ -55,7 +55,7 @@ PhysicsSystem::~PhysicsSystem()
     delete m_world;
 }
 
-void PhysicsSystem::injectPreUpdate(const float &par_timeSinceLastUpdate)
+void PhysicsSystem::injectUpdate(const float &par_timeSinceLastUpdate)
 {
     Q_UNUSED(par_timeSinceLastUpdate);
 
@@ -64,8 +64,7 @@ void PhysicsSystem::injectPreUpdate(const float &par_timeSinceLastUpdate)
     m_world->Step(par_timeSinceLastUpdate, velocityIterations, positionIterations);
 }
 
-void PhysicsSystem::injectPostUpdate(const float &par_timeSinceLastUpdate)
+b2World* PhysicsSystem::getWorld()
 {
-    Q_UNUSED(par_timeSinceLastUpdate);
-
+    return m_world;
 }

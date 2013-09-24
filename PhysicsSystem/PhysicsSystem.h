@@ -11,17 +11,18 @@ private:
     b2World *m_world;
 
 public:
-    static bool initialize();
+    static bool initialize(const float &par_gravityX, const float &par_gravityY);
     static void shutdown();
     static PhysicsSystem* instance();
 
 private:
-    PhysicsSystem();
+    PhysicsSystem(const float &par_gravityX, const float &par_gravityY);
     ~PhysicsSystem();
 
 public:
-    void injectPreUpdate(const float& par_timeSinceLastUpdate);
-    void injectPostUpdate(const float& par_timeSinceLastUpdate);
+    void injectUpdate(const float &par_timeSinceLastUpdate);
+
+    b2World* getWorld();
 };
 
 #endif
