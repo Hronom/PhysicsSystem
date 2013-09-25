@@ -13,3 +13,13 @@ void PhysicsUtils::updateSpeed(b2Body *par_body, const float &par_speedDirX, con
     if(speedX != par_speedDirX || speedY != par_speedDirY)
         par_body->SetLinearVelocity(b2Vec2(par_speedDirX, par_speedDirY));
 }
+
+float PhysicsUtils::toMeters(const float &par_pixels)
+{
+    return 0.5f * par_pixels;
+}
+
+float PhysicsUtils::toPixels(const float &par_meters)
+{
+    return 50.0f * par_meters;
+}
