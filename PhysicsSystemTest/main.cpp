@@ -17,17 +17,17 @@ int main(int argc, char *argv[])
     bodyDef.type = b2_dynamicBody;
     bodyDef.position.Set(0.0f, 4.0f);
 
-    b2Body* body;
+    b2Body *body;
     body = PhysicsSystem::instance()->getWorld()->CreateBody(&bodyDef);
-    body->SetLinearVelocity(b2Vec2(-1,0));
+    body->SetLinearVelocity(b2Vec2(1,0));
 
     PhysicsSystem::instance()->injectUpdate(1);
 
-    qDebug()<<body->GetPosition().x<<body->GetPosition().y;
+    qDebug()<<"Pos"<<body->GetPosition().x<<body->GetPosition().y<<"Vel"<<body->GetLinearVelocity().x<<body->GetLinearVelocity().y;
 
-    PhysicsSystem::instance()->injectUpdate(0.1);
+    PhysicsSystem::instance()->injectUpdate(15);
 
-    qDebug()<<body->GetPosition().x<<body->GetPosition().y;
+    qDebug()<<"Pos"<<body->GetPosition().x<<body->GetPosition().y<<"Vel"<<body->GetLinearVelocity().x<<body->GetLinearVelocity().y;
 
     PhysicsSystem::shutdown();
 

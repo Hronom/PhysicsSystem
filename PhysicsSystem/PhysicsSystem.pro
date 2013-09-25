@@ -6,10 +6,12 @@ TEMPLATE = lib
 CONFIG += staticlib c++11
 
 HEADERS += \
-    PhysicsSystem.h
+    PhysicsSystem.h \
+    PhysicsUtils.h
 
 SOURCES += \
-    PhysicsSystem.cpp
+    PhysicsSystem.cpp \
+    PhysicsUtils.cpp
 
 # Box2D
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../../Box2D_project/Box2D_install/ -L$$PWD/../../../Box2D_project/Box2D_install/ -lBox2D
